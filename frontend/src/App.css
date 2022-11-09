@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+.App{
+    min-height:100vh;
+    display:flex;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("./img2.jpg") center / cover no-repeat;
+  background-attachment: fixed;
+
+}
