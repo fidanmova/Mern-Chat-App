@@ -10,4 +10,4 @@
 
 ## ==> don't use cors object on socket.io 
 ## ==> delete all from inside public folder and pass content of build folder from frontend
-## ==> to deploy push only server side application
+## ==> to deploy push only server side application on render
