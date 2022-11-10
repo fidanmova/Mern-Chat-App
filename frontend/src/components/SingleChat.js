@@ -20,9 +20,10 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-// after installing socket.io client, exchange  http://localhost:5000 with herdeployingoku link
-const ENDPOINT = "http://localhost:5000";
-// const ENDPOINT = "https://fidan-chat.herokuapp.com/ ";
+// after installing socket.io client, exchange  http://localhost:5000 with deploying link
+// const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://chat-j1bt.onrender.com";
+
 let socket, selectedChatCompare;
 
 export default function SingleChat() {
