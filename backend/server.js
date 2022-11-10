@@ -11,10 +11,10 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
-// const path = require("path");
+const path = require("path");
 
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, "public")));
 // Connect to the DB
 mongoose
   .connect(process.env.MONGO_URI)
@@ -34,23 +34,9 @@ app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 // For sending messages
 app.use("/api/message", messageRoutes);
-
-// ----------------Deployment with Heroku----------------------
-// const __dirname1 = path.resolve();
-// // app.use(express.static(path.join(__dirname, "client", "build")))
-
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname1, "/frontend/build")));
-
-//   app.get("*", (req, res) =>
-//     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-//   );
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("API is running..");
-//   });
-// }
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
 // Non existing pages
 app.use(notFound);
 app.use(errorHandler);
@@ -62,8 +48,6 @@ const server = app.listen(
 );
 
 const io = require("socket.io")(server, {
-  // pingTimeout= the amount of time it will wait while being inactive. After 60 sec if user don't send any messages, it's gonna close the connection to save the bandwidth
-  pingTimeout: 60000,
   cors: {
     origin: "http://localhost:3000",
   },
@@ -87,22 +71,27 @@ io.on("connection", (socket) => {
   });
   // for typing
   socket.on("typing", (room) => socket.in(room).emit("typing"));
-  socket.on(" stop typing", (room) => socket.in(room).emit("stop typing"));
+  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
   // send message notification
   socket.on("new message", (newMessageReceived) => {
     // check which chat it belongs
-
+    // console.log("Incoming Message", newMessageReceived);
     let chat = newMessageReceived.chat;
 
     // is that chat hasn't have a user than return
     if (!chat.users) return console.log("chat.users not defined");
 
     // if there is 5 ppl in the chat room, when u send message make sure 4 ppl receive it but not you
+    console.log("Users: ", chat.users);
     chat.users.forEach((user) => {
-      if (user._id == newMessageReceived.sender._id) return;
+      // dont send t myself
+      if (user._id != newMessageReceived.sender._id) {
+        socket.to(user._id).emit("message received", newMessageReceived);
+      }
 
-      socket.in(user._id).emit("message received", newMessageReceived);
+      // socket.in(user._id).emit("message received", newMessageReceived);
+
       // to check newMessageReceived object belongs which chat (current active or not), we do it on frontend. SingleChat create another useEffect under selectedChat
     });
   });
@@ -113,5 +102,3 @@ io.on("connection", (socket) => {
     socket.leave(userData._id);
   });
 });
-
-// "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"

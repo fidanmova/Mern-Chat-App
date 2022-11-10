@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-// after installing socket.io client, exchange  http://localhost:5000 with heroku link
+// after installing socket.io client, exchange  http://localhost:5000 with herdeployingoku link
 const ENDPOINT = "http://localhost:5000";
 // const ENDPOINT = "https://fidan-chat.herokuapp.com/ ";
 let socket, selectedChatCompare;
@@ -90,7 +90,19 @@ export default function SingleChat() {
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false)); // now go to typingHandler func
+    socket.on("stop typing", () => setIsTyping(false));
+    socket.on("message received", (message) => {
+      // setNewMessage(message.content);
+      console.log("Message From Server", message);
+      messages.push(message);
+      setMessages(messages);
+      // alert(message.content);
+    });
+    // return () => {
+    // socket.off("connected");
+    // socket.off("disconnect");
+    // socket.off("pong");
+    // };
   }, []);
 
   // call fetchMessages inside UseEffect
@@ -166,15 +178,15 @@ export default function SingleChat() {
       socket.emit("typing", selectedChat._id);
     }
     // decide when to stop typing, when user is not typing
-    let lastTypingTime = new DataTransfer().getTime();
+    // let lastTypingTime = new DataTransfer().getTime();
     let timerLength = 3000;
     setTimeout(() => {
-      let timeNow = new DataTransfer().getTime();
-      let timeDiff = timeNow - lastTypingTime;
-      if (timeDiff >= timerLength && typing) {
-        socket.emit("stop typing", selectedChat._id);
-        setIsTyping(false);
-      }
+      // let timeNow = new DataTransfer().getTime();
+      // let timeDiff = timeNow - lastTypingTime;
+      // if (timeDiff >= timerLength && typing)
+
+      socket.emit("stop typing", selectedChat._id);
+      setIsTyping(false);
     }, timerLength);
   };
 
