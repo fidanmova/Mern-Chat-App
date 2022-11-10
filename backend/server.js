@@ -49,7 +49,7 @@ const server = app.listen(
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chat-j1bt.onrender.com",
   },
 });
 // create connection to socket io
@@ -89,10 +89,6 @@ io.on("connection", (socket) => {
       if (user._id != newMessageReceived.sender._id) {
         socket.to(user._id).emit("message received", newMessageReceived);
       }
-
-      // socket.in(user._id).emit("message received", newMessageReceived);
-
-      // to check newMessageReceived object belongs which chat (current active or not), we do it on frontend. SingleChat create another useEffect under selectedChat
     });
   });
 
