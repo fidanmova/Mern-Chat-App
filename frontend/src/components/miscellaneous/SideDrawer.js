@@ -127,7 +127,7 @@ export default function SideDrawer() {
           </Button>
         </Tooltip>
         <Text fontSize="xl" fontFamily="Work sans">
-          Talk-A-Tive
+          Chat Room
         </Text>
         <div>
           <Menu>

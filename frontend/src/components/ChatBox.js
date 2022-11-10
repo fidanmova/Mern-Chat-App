@@ -13,8 +13,8 @@ export default function ChatBox() {
       alignItems="center"
       flexDir="column"
       p={3}
-      bg="black"
-      opacity={0.7}
+      bg="white"
+      opacity={0.6}
       w={{ base: "100%", md: "68%" }}
       borderRadius="lg"
       borderWidth="1px"

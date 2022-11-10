@@ -165,7 +165,7 @@ const addToGroup = asyncHandler(async (req, res) => {
   }
 });
 // @desc    Remove user from Group
-// @route   PUT /api/chat/groupremove
+// @route   PUT /api/chat/group remove
 // @access  Protected
 const removeFromGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;

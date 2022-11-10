@@ -14,7 +14,6 @@ export default function MyChats({ fetchAgain }) {
   const toast = useToast();
 
   const fetchChats = async () => {
-    // console.log(user._id);
     try {
       const config = {
         headers: {
@@ -22,7 +21,6 @@ export default function MyChats({ fetchAgain }) {
         },
       };
       const { data } = await axios.get("/api/chat", config);
-      // console.log(data);
       setChats(data);
     } catch (error) {
       toast({
@@ -71,21 +69,18 @@ export default function MyChats({ fetchAgain }) {
             d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
-            // ml="20px"
             color="black"
           >
             New Group Chat
           </Button>
         </GroupChatModal>
       </Box>
-
       <Box
         d="flex"
         flexDir="column"
         p={3}
         bg="#F8F8F8"
         w="100%"
-        h="100%"
         borderRadius="lg"
         overflowY="hidden"
       >

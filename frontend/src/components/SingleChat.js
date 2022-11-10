@@ -156,6 +156,7 @@ export default function SingleChat() {
       }
     }
   };
+
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
     // Typing Indicator Logic
@@ -175,7 +176,7 @@ export default function SingleChat() {
         setIsTyping(false);
       }
     }, timerLength);
-  }; // now display this on UI
+  };
 
   return (
     <>
@@ -218,11 +219,12 @@ export default function SingleChat() {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#E8E8E8"
+            bg="white"
             w="100%"
-            // h="80%"
+            h="70vh"
             borderRadius="lg"
-            overflowY="hidden"
+            overflowY="scroll"
+            scrollbarWidth="none"
           >
             {loading ? (
               <Spinner
@@ -240,7 +242,6 @@ export default function SingleChat() {
                   flexDirection: "column",
                   overflowY: "scroll",
                   scrollbarWidth: "none",
-                  height: "600px",
                 }}
               >
                 <ScrollableChat messages={messages} />
@@ -266,7 +267,7 @@ export default function SingleChat() {
               )}
               <Input
                 variant="filled"
-                bg="#E0E0E0"
+                bg="black"
                 placeholder="Enter a message.."
                 // typingHandler will also update newMessage state
                 onChange={typingHandler}

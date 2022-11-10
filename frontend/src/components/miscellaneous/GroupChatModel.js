@@ -195,7 +195,6 @@ export default function GroupChatModel({ children }) {
                 ))
             )}
           </ModalBody>
-
           <ModalFooter>
             <Button bg="#38B2AC" mr={3} onClick={handleSubmit} color="white">
               Create Chat

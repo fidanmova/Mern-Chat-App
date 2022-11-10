@@ -27,15 +27,9 @@ const sendMessage = asyncHandler(async (req, res) => {
     let message = await Message.create(newMessage);
 
     message = await message.populate("sender", "name pic");
-    // console.log(message);
+
     message = await message.populate("chat");
-    // populate the users : ech chat has this list of users
-    // users: [
-    //     {
-    //       type: mongoose.Schema.Types.ObjectId,
-    //       ref: "User",
-    //     },
-    //   ],
+
     message = await User.populate(message, {
       path: "chat.users",
       select: "name pic email",
