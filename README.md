@@ -1,8 +1,12 @@
 ## Chat
 ## Deployment
 
-## frontend ==> ENDPOINT don't use it on socket.io
-## npm run build
-## server ==> socket.io don't use cors object
-## delete all insid epublic and pass content of build folder
-## push only server side application
+ Client side 
+ ==> don't use ENDPOINT  on socket.io
+ ==> npm run build
+ 
+Server side
+
+==> don't use cors object on socket.io 
+==> delete all from inside public folder and pass content of build folder from frontend
+==> to deploy push only server side application
