@@ -15,6 +15,7 @@ const path = require("path");
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
 // Connect to the DB
 mongoose
   .connect(process.env.MONGO_URI)
@@ -32,11 +33,15 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
+
 // For sending messages
 app.use("/api/message", messageRoutes);
+
+// Deployment
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
+
 // Non existing pages
 app.use(notFound);
 app.use(errorHandler);
@@ -50,6 +55,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   cors: {
     origin: "https://chat-j1bt.onrender.com",
+    // origin: "http://localhost:5000",
   },
 });
 // create connection to socket io
@@ -85,7 +91,7 @@ io.on("connection", (socket) => {
     // if there is 5 ppl in the chat room, when u send message make sure 4 ppl receive it but not you
     console.log("Users: ", chat.users);
     chat.users.forEach((user) => {
-      // dont send t myself
+      // don't send to myself
       if (user._id != newMessageReceived.sender._id) {
         socket.to(user._id).emit("message received", newMessageReceived);
       }

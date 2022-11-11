@@ -282,6 +282,7 @@ export default function SingleChat() {
                 variant="filled"
                 bg="black"
                 placeholder="Enter a message.."
+                fontSize={{ base: "17px", md: "25px", lg: "30px" }}
                 // typingHandler will also update newMessage state
                 onChange={typingHandler}
                 value={newMessage}
@@ -292,7 +293,12 @@ export default function SingleChat() {
       ) : (
         // to get socket.io on same page
         <Box d="flex" alignItems="center" justifyContent="center" h="100%">
-          <Text fontSize="3xl" pb={3} fontFamily="Work sans" color="white">
+          <Text
+            fontSize={{ base: "17px", md: "30px", lg: "40px" }}
+            pb={3}
+            fontFamily="Work sans"
+            color="black"
+          >
             Click on a user to start chatting
           </Text>
         </Box>

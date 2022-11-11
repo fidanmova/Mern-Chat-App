@@ -55,7 +55,7 @@ export default function MyChats({ fetchAgain }) {
       <Box
         pb={3}
         px={3}
-        fontSize={{ base: "28px", md: "30px" }}
+        fontSize={{ base: "17px", md: "34px", lg: "35px" }}
         fontFamily="Work sans"
         d="flex"
         w="100%"
@@ -81,6 +81,7 @@ export default function MyChats({ fetchAgain }) {
         p={3}
         bg="#F8F8F8"
         w="100%"
+        h="70%"
         borderRadius="lg"
         overflowY="hidden"
       >

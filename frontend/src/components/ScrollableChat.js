@@ -19,9 +19,7 @@ export default function ScrollableChat({ messages }) {
           <div
             style={{
               display: "flex",
-              fontWeight: "bold",
               color: "black",
-              fontSize: "20px",
             }}
             key={m._id}
           >

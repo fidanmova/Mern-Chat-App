@@ -111,17 +111,6 @@ const Login = () => {
       >
         Login
       </Button>
-      <Button
-        variant="solid"
-        bg="#cfdbe6"
-        width="100%"
-        onClick={() => {
-          setEmail("guest@example.com");
-          setPassword("123456");
-        }}
-      >
-        Get Guest User Credentials
-      </Button>
     </VStack>
   );
 };

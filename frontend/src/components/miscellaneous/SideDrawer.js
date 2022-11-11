@@ -110,13 +110,13 @@ export default function SideDrawer() {
   };
 
   return (
-    <div style={{ color: "black" }}>
+    <div style={{ color: "white" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "white",
+          backgroundColor: "black",
           padding: "5px 10px 5px 10px",
           borderWidth: "8px",
         }}
@@ -126,9 +126,7 @@ export default function SideDrawer() {
             <Text>Search User</Text>
           </Button>
         </Tooltip>
-        <Text fontSize="xl" fontFamily="Work sans">
-          Chat Room
-        </Text>
+
         <div>
           <Menu>
             <MenuButton p={1}>

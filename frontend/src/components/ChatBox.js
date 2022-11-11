@@ -15,7 +15,7 @@ export default function ChatBox() {
       p={3}
       bg="white"
       opacity={0.6}
-      w={{ base: "100%", md: "68%" }}
+      w={{ base: "100%", md: "68%", sm: "40%" }}
       borderRadius="lg"
       borderWidth="1px"
     >
