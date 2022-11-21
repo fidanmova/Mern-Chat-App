@@ -145,8 +145,10 @@ export default function SideDrawer() {
           </MenuButton>
           <MenuList>
             <ProfileModel>{/* <MenuItem>My Profile</MenuItem> */}</ProfileModel>
-            <MenuDivider />
-            <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+            <MenuDivider color="black" />
+            <MenuItem color="black" onClick={logoutHandler}>
+              Logout
+            </MenuItem>
           </MenuList>
         </Menu>
       </div>
