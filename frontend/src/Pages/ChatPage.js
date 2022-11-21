@@ -5,6 +5,7 @@ import { useEffect, useContext } from "react";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
 import MyChats from "../components/MyChats";
 import ChatBox from "../components/ChatBox";
+import { Flex } from "@chakra-ui/react";
 
 export default function ChatPage() {
   const { user, fetchAgain, setFetchAgain } = useContext(Context);
@@ -20,19 +21,13 @@ export default function ChatPage() {
 
   return (
     <div style={{ width: "100%" }}>
-      <SideDrawer />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-          height: "90vh",
-          p: "10px",
-        }}
-      >
-        <MyChats fetchAgain={fetchAgain} />
-        <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
-      </div>
+      {user && <SideDrawer />}
+      <Flex d="flex" w="100%" direction={{ base: "column", md: "row" }}>
+        {user && <MyChats fetchAgain={fetchAgain} />}
+        {user && (
+          <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
+      </Flex>
     </div>
   );
 }
